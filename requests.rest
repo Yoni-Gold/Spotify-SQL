@@ -1,0 +1,166 @@
+### get all songs
+GET  http://localhost:3001/songs
+
+
+### get all users
+GET http://localhost:3001/users
+
+
+### get all artists
+GET http://localhost:3001/artists
+
+
+### get all albums
+GET  http://localhost:3001/albums
+
+
+### get all playlists
+GET http://localhost:3001/playlists
+
+
+### get a song by id
+GET  http://localhost:3001/songs/2
+
+
+### get a user by id
+GET http://localhost:3001/users/3
+
+
+### get an artist by id
+GET http://localhost:3001/artists/2
+
+
+### get an album by id
+GET http://localhost:3001/albums/3
+
+
+### get a playlist by id
+GET http://localhost:3001/playlists/2
+
+
+### post songs
+POST http://localhost:3001/songs
+Content-Type: application/json
+
+{
+    "songs": [
+        [20, "test1" , 4, null, "{{$localDatetime "YYYY-MM-DD"}}", 300, null]
+    ]
+}
+
+
+### post artists
+POST http://localhost:3001/artists
+Content-Type: application/json
+
+{
+    "artists": [
+        [20, "test1" , "x", "{{$localDatetime "YYYY-MM-DD"}}"],
+        [21, "test2" , "x", "{{$localDatetime "YYYY-MM-DD"}}"],
+        [22, "test3" , "x", "{{$localDatetime "YYYY-MM-DD"}}"]
+    ]
+}
+
+
+### post users
+POST http://localhost:3001/users
+Content-Type: application/json
+
+{
+    "users": [
+        [20, "test1" , null, "XXX", "{{$localDatetime "YYYY-MM-DD"}}", false],
+        [21, "test2" , null, "XXX", "{{$localDatetime "YYYY-MM-DD"}}", false],
+        [22, "test3" , null, "XXX", "{{$localDatetime "YYYY-MM-DD"}}", false]
+    ]
+}
+
+
+### post albums
+POST http://localhost:3001/albums
+Content-Type: application/json
+
+{
+    "albums": [
+        [20, "test1" , 2, 99, "{{$localDatetime "YYYY-MM-DD"}}"],
+        [21, "test2" , 2, 99, "{{$localDatetime "YYYY-MM-DD"}}"],
+        [22, "test3" , 2, 99, "{{$localDatetime "YYYY-MM-DD"}}"]
+    ]
+}
+
+
+### post playlists
+POST http://localhost:3001/playlists
+Content-Type: application/json
+
+{
+    "playlists": [
+        [20, "test1" , 4, "{{$localDatetime "YYYY-MM-DD"}}", true],
+        [21, "test2" , 4, "{{$localDatetime "YYYY-MM-DD"}}", true],
+        [22, "test3" , 4, "{{$localDatetime "YYYY-MM-DD"}}", true]
+    ]
+}
+
+
+### delete a song by id
+DELETE http://localhost:3001/songs/22
+
+
+### delete an artist by id
+DELETE http://localhost:3001/artists/22
+
+
+### delete an album by id
+DELETE http://localhost:3001/albums/22
+
+
+### delete a user by id
+DELETE http://localhost:3001/users/22
+
+
+### delete a playlist by id
+DELETE http://localhost:3001/playlists/22
+
+
+### update a song by id
+PUT http://localhost:3001/songs/20
+Content-Type: application/json
+
+{
+    "songs": ["updated" , 4, null, "{{$localDatetime "YYYY-MM-DD"}}", 300, null]
+}
+
+
+### update an artist by id
+PUT http://localhost:3001/artists/20
+Content-Type: application/json
+
+{
+    "artists": ["updated" , "X", "{{$localDatetime "YYYY-MM-DD"}}"]
+}
+
+
+### update a user by id
+PUT http://localhost:3001/users/20
+Content-Type: application/json
+
+{
+    "users": ["updated" , "XXX@gmail.com", "X", "{{$localDatetime "YYYY-MM-DD"}}", false]
+}
+
+
+### update an album by id
+PUT http://localhost:3001/albums/20
+Content-Type: application/json
+
+{
+    "albums": ["updated" , 1, 99, "{{$localDatetime "YYYY-MM-DD"}}"]
+}
+
+
+### update a playlist by id
+PUT http://localhost:3001/playlists/20
+Content-Type: application/json
+
+{
+    "playlists": ["updated" , 1, "{{$localDatetime "YYYY-MM-DD"}}", true]
+}
