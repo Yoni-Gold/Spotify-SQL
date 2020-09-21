@@ -27,7 +27,7 @@ GET http://localhost:3001/users/3
 
 
 ### get an artist by id
-GET http://localhost:3001/artists/2
+GET http://localhost:3001/artists/1
 
 
 ### get an album by id
@@ -164,3 +164,6 @@ Content-Type: application/json
 {
     "playlists": ["updated" , 1, "{{$localDatetime "YYYY-MM-DD"}}", true]
 }
+
+###
+GET http://localhost:3001/playlistSongs

@@ -87,6 +87,18 @@ app.get('/playlists/:id', async (req, res) =>{
 //// GET requests to the entire table
 {
 app.get('/songs', async (req, res) =>{
+    if (req.query.search) {
+        dataBase.query(`SELECT * FROM songs WHERE name LIKE "%${req.query.search}%"`, (error, results, fields) => {
+            if (error) {
+                res.send(error.message);
+                throw error;
+            };
+            res.send(results);
+          });
+    }
+    
+    else 
+    {
     dataBase.query('SELECT * FROM songs', (error, results, fields) => {
         if (error) {
             res.send(error.message);
@@ -94,6 +106,7 @@ app.get('/songs', async (req, res) =>{
         };
         res.send(results);
       });
+    }
 });
 
 app.get('/users', async (req, res) =>{
@@ -107,6 +120,18 @@ app.get('/users', async (req, res) =>{
 });
 
 app.get('/artists', async (req, res) =>{
+    if (req.query.search) {
+        dataBase.query(`SELECT * FROM artists WHERE name LIKE "%${req.query.search}%"`, (error, results, fields) => {
+            if (error) {
+                res.send(error.message);
+                throw error;
+            };
+            res.send(results);
+          });
+    }
+    
+    else 
+    {
     dataBase.query('SELECT * FROM artists', (error, results, fields) => {
         if (error) {
             res.send(error.message);
@@ -114,9 +139,22 @@ app.get('/artists', async (req, res) =>{
         };
         res.send(results);
       });
+    }
 });
 
 app.get('/albums', async (req, res) =>{
+    if (req.query.search) {
+        dataBase.query(`SELECT * FROM albums WHERE name LIKE "%${req.query.search}%"`, (error, results, fields) => {
+            if (error) {
+                res.send(error.message);
+                throw error;
+            };
+            res.send(results);
+          });
+    }
+    
+    else 
+    {
     dataBase.query('SELECT * FROM albums', (error, results, fields) => {
         if (error) {
             res.send(error.message);
@@ -124,9 +162,22 @@ app.get('/albums', async (req, res) =>{
         };
         res.send(results);
       });
+    }
 });
 
 app.get('/playlists', async (req, res) =>{
+    if (req.query.search) {
+        dataBase.query(`SELECT * FROM playlists WHERE name LIKE "%${req.query.search}%"`, (error, results, fields) => {
+            if (error) {
+                res.send(error.message);
+                throw error;
+            };
+            res.send(results);
+          });
+    }
+    
+    else 
+    {
     dataBase.query('SELECT * FROM playlists', (error, results, fields) => {
         if (error) {
             res.send(error.message);
@@ -134,6 +185,7 @@ app.get('/playlists', async (req, res) =>{
         };
         res.send(results);
       });
+    }
 });
 }
 
@@ -296,6 +348,107 @@ app.put('/playlists/:id', async (req, res) =>{
       });
 });
 }
+
+//// GET Albums by Artist
+app.get('/albums/artist/:id', async (req, res) =>{
+    dataBase.query('SELECT * FROM albums WHERE artist_id = ?', [req.params.id], (error, results, fields) => {
+        if (error) {
+            res.send(error.message);
+            throw error;
+        };
+        res.send(results);
+      });
+});
+
+//// GET Songs in Album
+app.get('/songs/album/:id', async (req, res) =>{
+    dataBase.query('SELECT * FROM songs WHERE album_id = ?', [req.params.id], (error, results, fields) => {
+        if (error) {
+            res.send(error.message);
+            throw error;
+        };
+        res.send(results);
+      });
+});
+
+//// GET All Songs by Artist
+app.get('/songs/artist/:id', async (req, res) =>{
+    dataBase.query('SELECT * FROM songs WHERE artist_id = ?', [req.params.id], (error, results, fields) => {
+        if (error) {
+            res.send(error.message);
+            throw error;
+        };
+        res.send(results);
+      });
+});
+
+
+//// GET Top 10
+{
+    app.get('/song/top', async (req, res) =>{
+        dataBase.query('SELECT * FROM songs LIMIT 10', (error, results, fields) => {
+            if (error) {
+                res.send(error.message);
+                throw error;
+            };
+            res.send(results);
+          });
+    });
+
+    app.get('/user/top', async (req, res) =>{
+        dataBase.query('SELECT * FROM users LIMIT 10', (error, results, fields) => {
+            if (error) {
+                res.send(error.message);
+                throw error;
+            };
+            res.send(results);
+          });
+    });
+    
+    app.get('/artist/top', async (req, res) =>{
+        dataBase.query('SELECT * FROM artists LIMIT 10', (error, results, fields) => {
+            if (error) {
+                res.send(error.message);
+                throw error;
+            };
+            res.send(results);
+          });
+    });
+    
+    app.get('/album/top', async (req, res) =>{
+        dataBase.query('SELECT * FROM albums LIMIT 10', (error, results, fields) => {
+            if (error) {
+                res.send(error.message);
+                throw error;
+            };
+            res.send(results);
+          });
+    });
+    
+    app.get('/playlist/top', async (req, res) =>{
+        dataBase.query('SELECT * FROM playlists LIMIT 10', (error, results, fields) => {
+            if (error) {
+                res.send(error.message);
+                throw error;
+            };
+            res.send(results);
+          });
+    });
+}
+
+//// GET Songs in playlist
+app.get('/playlistSongs/:id', async (req, res) =>{
+    dataBase.query('SELECT playlists.id, playlists.name, playlistSongs.song_id, songs.id, songs.name, songs.youtube_link FROM playlists LEFT JOIN playlistSongs ON playlists.id = playlistSongs.playlist_id LEFT JOIN songs ON playlistSongs.song_id = songs.id WHERE playlists.id = ?', [req.params.id], (error, results, fields) => {
+        if (error) {
+            res.send(error.message);
+            throw error;
+        };
+        res.send(results);
+      });
+});
+
+
+
 
 app.use(unknownEndpoint);
 
