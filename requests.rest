@@ -166,4 +166,4 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3001/playlistSongs
+GET http://localhost:3001/album/top
